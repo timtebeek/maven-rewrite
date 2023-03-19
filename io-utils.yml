@@ -22,3 +22,7 @@ recipeList:
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: org.apache.maven.shared.utils.io.IOUtil
       newFullyQualifiedTypeName: org.apache.commons.io.IOUtils
+  # Revert cases without known replacement until handled in dedicated recipes
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.commons.io.IOUtils close(..)
+      fullyQualifiedTargetTypeName: org.codehaus.plexus.util.IOUtil
