@@ -1,0 +1,37 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.FindStringUtils
+displayName: Find StringUtils
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.commons.lang3.StringUtils *(..)
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.PlexusStringUtilsToCommonsLang3
+displayName: Replace Plexus StringUtils with Commons Lang3
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.codehaus.plexus.util.StringUtils
+      newFullyQualifiedTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils clean(String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.apache.commons.lang3.StringUtils clean(String)
+      newMethodName: trimToEmpty
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.MavenSharedStringUtilsToCommonsLang3
+displayName: Replace Maven Shared StringUtils with Commons Lang3
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.apache.maven.shared.utils.StringUtils
+      newFullyQualifiedTypeName: org.apache.commons.lang3.StringUtils

@@ -1,0 +1,59 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.FindFileUtils
+displayName: Find FileUtils
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.commons.io.FileUtils *(..)
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.FileUtilsToCommonsIO
+displayName: Replace FileUtils with Commons IO
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.io.File)
+      newMethodName: readFileToString
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.io.File, String)
+      newMethodName: readFileToString
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.codehaus.plexus.util.FileUtils loadFile(java.io.File)
+      newMethodName: readLines
+  - org.openrewrite.java.ReorderMethodArguments:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.io.File, String, String)
+      oldParameterNames:
+        - file
+        - content
+        - encoding
+      newParameterNames:
+        - file
+        - encoding
+        - content
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.io.File, String, String)
+      newMethodName: write
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.codehaus.plexus.util.FileUtils
+      newFullyQualifiedTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.apache.maven.shared.utils.io.FileUtils
+      newFullyQualifiedTypeName: org.apache.commons.io.FileUtils
+  # Revert cases without known replacement until handled in dedicated recipes
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.commons.io.FileUtils copyDirectoryStructureIfModified(java.io.File, java.io.File)
+      fullyQualifiedTargetTypeName: org.codehaus.plexus.util.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.commons.io.FileUtils fileExists(String)
+      fullyQualifiedTargetTypeName: org.codehaus.plexus.util.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.commons.io.FileUtils fileWrite(String, String, String)
+      fullyQualifiedTargetTypeName: org.codehaus.plexus.util.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.commons.io.FileUtils normalize(String)
+      fullyQualifiedTargetTypeName: org.codehaus.plexus.util.FileUtils

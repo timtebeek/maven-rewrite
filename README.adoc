@@ -1,0 +1,38 @@
+# Maven Rewrite
+
+Collection of OpenRewrite[https://github.com/openrewrite] migration recipes to clean up dependencies on plexus-utils, maven-shared-utils, commons-lang and commons-io in Apache Maven & plugins in favor of JDK methods, with a fallback to Apache Commons.
+
+## StringUtils
+
+### Plexus
+https://github.com/codehaus-plexus/plexus-utils/blob/master/src/main/java/org/codehaus/plexus/util/StringUtils.java
+
+### Maven shared utils
+https://github.com/apache/maven-shared-utils/blob/master/src/main/java/org/apache/maven/shared/utils/StringUtils.java
+
+### Commons Lang
+https://github.com/apache/commons-lang/blob/master/src/main/java/org/apache/commons/lang3/StringUtils.java
+
+
+## IOUtils
+
+### Plexus
+https://github.com/codehaus-plexus/plexus-utils/blob/master/src/main/java/org/codehaus/plexus/util/IOUtil.java
+
+### Maven shared utils
+https://github.com/apache/maven-shared-utils/blob/master/src/main/java/org/apache/maven/shared/utils/io/IOUtil.java
+
+### Commons IO
+https://github.com/apache/commons-io/blob/master/src/main/java/org/apache/commons/io/IOUtils.java
+
+
+## FileUtils
+
+### Plexus
+https://github.com/codehaus-plexus/plexus-utils/blob/master/src/main/java/org/codehaus/plexus/util/FileUtils.java
+
+### Maven shared utils
+https://github.com/apache/maven-shared-utils/blob/master/src/main/java/org/apache/maven/shared/utils/io/FileUtils.java
+
+### Commons IO
+https://github.com/apache/commons-io/blob/master/src/main/java/org/apache/commons/io/FileUtils.java

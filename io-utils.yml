@@ -1,0 +1,24 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.FindIOUtils
+displayName: Find IOUtils
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.IOUtil *(..)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.commons.io.IOUtils *(..)
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.IOUtilsToCommonsIO
+displayName: Replace Plexus IOUtils with Commons IO
+description: https://issues.apache.org/jira/browse/MNG-6825
+recipeList:
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.codehaus.plexus.util.IOUtil
+      newFullyQualifiedTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.apache.maven.shared.utils.io.IOUtil
+      newFullyQualifiedTypeName: org.apache.commons.io.IOUtils
