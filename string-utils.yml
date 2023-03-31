@@ -1,4 +1,22 @@
 type: specs.openrewrite.org/v1beta/recipe
+name: com.github.timtebeek.maven.rewrite.ReplaceStringUtils
+displayName: [MNG-6825] Replace StringUtils
+description: https://issues.apache.org/jira/browse/MNG-6825
+applicability:
+  singleSource:
+    - org.openrewrite.java.search.FindTypes:
+        fullyQualifiedTypeName: org.apache.maven.shared.utils.StringUtils
+  anySource:
+    - org.openrewrite.maven.search.FindDependency:
+        groupId: org.apache.commons
+        artifactId: commons-lang3
+recipeList:
+  - com.github.timtebeek.maven.rewrite.FindStringUtils
+  - com.github.timtebeek.maven.rewrite.PlexusStringUtilsToCommonsLang3
+  - com.github.timtebeek.maven.rewrite.MavenSharedStringUtilsToCommonsLang3
+
+---
+type: specs.openrewrite.org/v1beta/recipe
 name: com.github.timtebeek.maven.rewrite.FindStringUtils
 displayName: Find StringUtils
 description: https://issues.apache.org/jira/browse/MNG-6825
