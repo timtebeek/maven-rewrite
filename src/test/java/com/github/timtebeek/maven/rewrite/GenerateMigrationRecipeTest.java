@@ -18,20 +18,17 @@
  */
 package com.github.timtebeek.maven.rewrite;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,6 +45,16 @@ class GenerateMigrationRecipeTest {
                 Class.forName(fullyQualifiedClassNameTarget),
                 outputFolder);
     }
+
+    private static final Map<Class<?>, Map<String, String>> INDIRECT_REPLACEMENTS = Map.of(
+            org.apache.maven.shared.utils.StringUtils.class, Map.of(
+                    "capitalise(java.lang.String)", "capitalize",
+                    "clean(java.lang.String)", "trimToEmpty",
+                    "replace(java.lang.String,char,char)", "replaceChars"),
+            org.codehaus.plexus.util.StringUtils.class, Map.of(
+                    "capitalise(java.lang.String)", "capitalize",
+                    "clean(java.lang.String)", "trimToEmpty",
+                    "replace(java.lang.String,char,char)", "replaceChars"));
 
     private static void generateRecipe(Class<?> source, Class<?> target, Path outputFolder) throws IOException {
         SortedSet<String> sourceMethodPatterns = getMethodNamesAndParameters(source.getMethods());
@@ -70,6 +77,9 @@ class GenerateMigrationRecipeTest {
         // Write recipes for direct replacements
         writeDirectReplacements(source, target, outputFolder, methodsWithDirectReplacement);
         writeFindManualReplacements(source, target, outputFolder, methodsWithIndirectReplacement);
+
+        // Write recipes for indirect replacements
+        writeIndirectReplacements(source, target, outputFolder, INDIRECT_REPLACEMENTS.get(source));
     }
 
     private static SortedSet<String> getMethodNamesAndParameters(Method[] sourceMethods) {
@@ -114,15 +124,47 @@ class GenerateMigrationRecipeTest {
                 StandardOpenOption.APPEND);
     }
 
-    private Map<String, String> MAVEN_SHARED_STRING_UTILS_METHODS_RENAMED_IN_COMMONS_LANG3 = Map.of(
-            "capitalize(java.lang.String)", "capitalise",
-            "clean(java.lang.String)", "trimToEmpty",
-            "replace(java.lang.String,char,char)", "replaceChars");
-    private Map<String, String> PLEXUS_STRING_UTILS_METHODS_RENAMED_IN_COMMONS_LANG3 = Map.of(
-            "capitalize(java.lang.String)", "capitalise",
-            "clean(java.lang.String)", "trimToEmpty",
-            "replace(java.lang.String,char,char)", "replaceChars");
-    // TODO Add dual recipes for known renamed methods
+    private static void writeIndirectReplacements(
+            Class<?> source, Class<?> target, Path outputFolder, Map<String, String> indirectReplacements) throws IOException {
+        // Write recipes for methods without direct replacement
+        Path indirectReplacementFile =
+                outputFolder.resolve("META-INF/rewrite/%s.IndirectReplacements.yml".formatted(source.getName()));
+        Files.write(
+                indirectReplacementFile,
+                """
+                        ---
+                        type: specs.openrewrite.org/v1beta/recipe
+                        name: %1$s.IndirectReplacements
+                        displayName: Replace `%1$s` with `%2$s`
+                        description: Replace `%1$s` method calls with calls to `%2$s`.
+                        recipeList:
+                        """
+                        .formatted(source.getName(), target.getName())
+                        .getBytes());
+        // Append recipe list
+        Files.write(
+                indirectReplacementFile,
+                indirectReplacements.entrySet().stream()
+                        .sorted(Comparator.comparing(Map.Entry::getKey))
+                        .map(entry ->
+                                """
+                                          - org.openrewrite.java.ChangeMethodTargetToStatic:
+                                              methodPattern: %1$s %2$s
+                                              fullyQualifiedTargetTypeName: %3$s
+                                          - org.openrewrite.java.ChangeMethodName:
+                                              methodPattern: %3$s %2$s
+                                              newMethodName: %4$s
+                                        """
+                                        .formatted(
+                                                source.getName(),
+                                                entry.getKey(),
+                                                target.getName(),
+                                                entry.getValue()))
+                        .collect(Collectors.joining())
+                        .getBytes(),
+                StandardOpenOption.APPEND);
+    }
+
 
     private static void writeFindManualReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
@@ -147,9 +189,9 @@ class GenerateMigrationRecipeTest {
                 methodsPatterns.stream()
                         .map(m ->
                                 """
-                                  - org.openrewrite.java.search.FindMethods:
-                                      methodPattern: %s %s
-                                """
+                                          - org.openrewrite.java.search.FindMethods:
+                                              methodPattern: %s %s
+                                        """
                                         .formatted(source.getName(), m))
                         .collect(Collectors.joining())
                         .getBytes(),
@@ -165,19 +207,19 @@ class GenerateMigrationRecipeTest {
         assertThat(Files.readString(directReplacements))
                 .startsWith(
                         """
-                ---
-                type: specs.openrewrite.org/v1beta/recipe
-                name: org.codehaus.plexus.util.StringUtils.DirectReplacements
-                displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
-                description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
-                recipeList:
-                  - org.openrewrite.java.ChangeMethodTargetToStatic:
-                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int)
-                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
-                  - org.openrewrite.java.ChangeMethodTargetToStatic:
-                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
-                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
-                """);
+                                ---
+                                type: specs.openrewrite.org/v1beta/recipe
+                                name: org.codehaus.plexus.util.StringUtils.DirectReplacements
+                                displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
+                                description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+                                recipeList:
+                                  - org.openrewrite.java.ChangeMethodTargetToStatic:
+                                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int)
+                                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+                                  - org.openrewrite.java.ChangeMethodTargetToStatic:
+                                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
+                                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+                                """);
         Path indirectReplacements =
                 rewriteDir.resolve("org.codehaus.plexus.util.StringUtils.FindManualReplacements.yml");
         assertThat(Files.readString(indirectReplacements))

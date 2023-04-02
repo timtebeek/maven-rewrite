@@ -19,8 +19,10 @@ recipeList:
   - com.github.timtebeek.maven.rewrite.AddCommonsLang3DependencyIfUsingPlexusStringUtils
   - com.github.timtebeek.maven.rewrite.AddCommonsLang3DependencyIfUsingMavenSharedStringUtils
   - org.apache.maven.shared.utils.StringUtils.DirectReplacements
+  - org.apache.maven.shared.utils.StringUtils.IndirectReplacements
   - org.apache.maven.shared.utils.StringUtils.ManualReplacements
   - org.codehaus.plexus.util.StringUtils.DirectReplacements
+  - org.codehaus.plexus.util.StringUtils.IndirectReplacements
   - org.codehaus.plexus.util.StringUtils.ManualReplacements
 ---
 type: specs.openrewrite.org/v1beta/recipe
