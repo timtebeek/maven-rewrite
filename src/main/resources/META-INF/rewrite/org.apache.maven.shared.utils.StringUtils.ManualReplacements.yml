@@ -17,3 +17,17 @@ recipeList:
   - org.openrewrite.java.ChangeMethodName:
       methodPattern: org.apache.commons.lang3.StringUtils clean(String)
       newMethodName: trimToEmpty
+
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(Object)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object)
+      newMethodName: toString
+
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(Object, String)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object, String)
+      newMethodName: toString

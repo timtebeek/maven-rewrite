@@ -44,6 +44,7 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
         class DirectReplacements {
             @Test
             void reverse() {
+                // language=java
                 rewriteRun(
                         java(
                                 """
@@ -75,6 +76,7 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
         class ManualReplacements {
             @Test
             void capitalise() {
+                // language=java
                 rewriteRun(
                         java(
                                 """
@@ -103,6 +105,7 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
 
             @Test
             void clean() {
+                // language=java
                 rewriteRun(
                         java(
                                 """
@@ -128,6 +131,35 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """));
             }
+
+            @Test
+            void defaultString() {
+                // language=java
+                rewriteRun(
+                        java(
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import org.codehaus.plexus.util.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.defaultString("foo", "bar");
+                                            }
+                                        }
+                                        """,
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import java.util.Objects;
+
+                                        class A {
+                                            public void test() {
+                                                Objects.toString("foo", "bar");
+                                            }
+                                        }
+                                        """));
+            }
         }
     }
 
@@ -137,6 +169,7 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
         class DirectReplacements {
             @Test
             void reverse() {
+                // language=java
                 rewriteRun(
                         java(
                                 """
@@ -167,7 +200,37 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
         @Nested
         class ManualReplacements {
             @Test
+            void capitalise() {
+                // language=java
+                rewriteRun(
+                        java(
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import org.codehaus.plexus.util.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.capitalise("foo");
+                                            }
+                                        }
+                                        """,
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import org.apache.commons.lang3.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.capitalize("foo");
+                                            }
+                                        }
+                                        """));
+            }
+
+            @Test
             void clean() {
+                // language=java
                 rewriteRun(
                         java(
                                 """
@@ -189,6 +252,35 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         class A {
                                             public void test() {
                                                 StringUtils.trimToEmpty("foo");
+                                            }
+                                        }
+                                        """));
+            }
+
+            @Test
+            void defaultString() {
+                // language=java
+                rewriteRun(
+                        java(
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import org.codehaus.plexus.util.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.defaultString("foo", "bar");
+                                            }
+                                        }
+                                        """,
+                                """
+                                        package org.apache.maven.shared.utils;
+
+                                        import java.util.Objects;
+
+                                        class A {
+                                            public void test() {
+                                                Objects.toString("foo", "bar");
                                             }
                                         }
                                         """));
