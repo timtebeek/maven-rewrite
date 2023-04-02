@@ -97,8 +97,8 @@ class GenerateMigrationRecipeTest {
                         .map(m ->
                                 """
                                           - org.openrewrite.java.ChangeMethodTargetToStatic:
-                                            methodPattern: %s %s
-                                            fullyQualifiedTargetTypeName: %s
+                                              methodPattern: %s %s
+                                              fullyQualifiedTargetTypeName: %s
                                         """
                                         .formatted(source.getName(), m, target.getName()))
                         .collect(Collectors.joining())
@@ -130,7 +130,7 @@ class GenerateMigrationRecipeTest {
                         .map(m ->
                                 """
                                   - org.openrewrite.java.search.FindMethods:
-                                    methodPattern: %s %s
+                                      methodPattern: %s %s
                                 """
                                         .formatted(source.getName(), m))
                         .collect(Collectors.joining())
@@ -154,11 +154,11 @@ class GenerateMigrationRecipeTest {
                 description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
                 recipeList:
                   - org.openrewrite.java.ChangeMethodTargetToStatic:
-                    methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int)
-                    fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int)
+                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
                   - org.openrewrite.java.ChangeMethodTargetToStatic:
-                    methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
-                    fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+                      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
+                      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
                 """);
         Path indirectReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtilsIndirectReplacements.yml");
         assertThat(Files.readString(indirectReplacements))
@@ -171,9 +171,9 @@ class GenerateMigrationRecipeTest {
                                 description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
                                 recipeList:
                                   - org.openrewrite.java.search.FindMethods:
-                                    methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
+                                      methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
                                   - org.openrewrite.java.search.FindMethods:
-                                    methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
+                                      methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
                                 """);
     }
 
