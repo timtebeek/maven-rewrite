@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -55,6 +56,10 @@ class GenerateMigrationRecipeTest {
         targetMethodPatterns.addAll(targetMethodPatterns.stream()
                 .map(m -> m.replace("CharSequence", "String"))
                 .collect(Collectors.toSet()));
+        // Duplicate any target method patterns that use int instead of char
+        targetMethodPatterns.addAll(targetMethodPatterns.stream()
+                .map(m -> m.replace("int", "char"))
+                .collect(Collectors.toSet()));
 
         // Determine which methods are present in both classes.
         SortedSet<String> methodsWithDirectReplacement = new TreeSet<>(sourceMethodPatterns);
@@ -65,7 +70,7 @@ class GenerateMigrationRecipeTest {
 
         // Write recipes for direct replacements
         writeDirectReplacements(source, target, outputFolder, methodsWithDirectReplacement);
-        writeIndirectReplacements(source, target, outputFolder, methodsWithIndirectReplacement);
+        writeFindManualReplacements(source, target, outputFolder, methodsWithIndirectReplacement);
     }
 
     private static SortedSet<String> getMethodNamesAndParameters(Method[] sourceMethods) {
@@ -110,7 +115,19 @@ class GenerateMigrationRecipeTest {
                 StandardOpenOption.APPEND);
     }
 
-    private static void writeIndirectReplacements(
+    private Map<String, String> MAVEN_SHARED_STRING_UTILS_METHODS_RENAMED_IN_COMMONS_LANG3 = Map.of(
+            "capitalize(java.lang.String)", "capitalise",
+            "clean(java.lang.String)", "trimToEmpty",
+            "replace(java.lang.String,char,char)", "replaceChars"
+    );
+    private Map<String, String> PLEXUS_STRING_UTILS_METHODS_RENAMED_IN_COMMONS_LANG3 = Map.of(
+            "capitalize(java.lang.String)", "capitalise",
+            "clean(java.lang.String)", "trimToEmpty",
+            "replace(java.lang.String,char,char)", "replaceChars"
+    );
+    // TODO Add dual recipes for known renamed methods
+
+    private static void writeFindManualReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
         // Write recipes for methods without direct replacement
         Path directReplacementFile =

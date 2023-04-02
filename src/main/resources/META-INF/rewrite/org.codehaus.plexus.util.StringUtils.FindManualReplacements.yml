@@ -23,8 +23,6 @@ recipeList:
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils concatenate(java.lang.Object[])
   - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,char)
-  - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils defaultString(java.lang.Object)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils defaultString(java.lang.Object,java.lang.String)

@@ -26,6 +26,9 @@ recipeList:
       methodPattern: org.codehaus.plexus.util.StringUtils chop(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,char)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
