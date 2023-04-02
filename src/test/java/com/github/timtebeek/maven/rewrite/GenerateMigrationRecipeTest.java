@@ -160,7 +160,8 @@ class GenerateMigrationRecipeTest {
                       methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
                       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
                 """);
-        Path indirectReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtils.FindManualReplacements.yml");
+        Path indirectReplacements =
+                rewriteDir.resolve("org.codehaus.plexus.util.StringUtils.FindManualReplacements.yml");
         assertThat(Files.readString(indirectReplacements))
                 .startsWith(
                         """

@@ -13,7 +13,7 @@ recipeList:
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.github.timtebeek.maven.rewrite.StringUtilsToCommonsLang3
-displayName: [MNG-6825] Replace StringUtils with Commons Lang3
+displayName: "[MNG-6825] Replace StringUtils with Commons Lang3"
 description: https://issues.apache.org/jira/browse/MNG-6825
 recipeList:
   - com.github.timtebeek.maven.rewrite.AddCommonsLang3DependencyIfUsingPlexusStringUtils
