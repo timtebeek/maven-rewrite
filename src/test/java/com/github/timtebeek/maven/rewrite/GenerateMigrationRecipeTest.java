@@ -81,13 +81,13 @@ class GenerateMigrationRecipeTest {
         Files.write(
                 yamlFile,
                 """
-                ---
-                type: specs.openrewrite.org/v1beta/recipe
-                name: %1$sDirectReplacements
-                displayName: Replace `%1$s` with `%2$s`
-                description: Replace `%1$s` method calls with calls to `%2$s`.
-                recipeList:
-                """
+                        ---
+                        type: specs.openrewrite.org/v1beta/recipe
+                        name: %1$sDirectReplacements
+                        displayName: Replace `%1$s` with `%2$s`
+                        description: Replace `%1$s` method calls with calls to `%2$s`.
+                        recipeList:
+                        """
                         .formatted(source.getName(), target.getName())
                         .getBytes());
         // Append recipe list
@@ -96,10 +96,10 @@ class GenerateMigrationRecipeTest {
                 methodsPatterns.stream()
                         .map(m ->
                                 """
-                                  - org.openrewrite.java.ChangeMethodTargetToStatic:
-                                    methodPattern: %s %s
-                                    fullyQualifiedTargetTypeName: %s
-                                """
+                                          - org.openrewrite.java.ChangeMethodTargetToStatic:
+                                            methodPattern: %s %s
+                                            fullyQualifiedTargetTypeName: %s
+                                        """
                                         .formatted(source.getName(), m, target.getName()))
                         .collect(Collectors.joining())
                         .getBytes(),
@@ -114,13 +114,13 @@ class GenerateMigrationRecipeTest {
         Files.write(
                 directReplacementFile,
                 """
-                ---
-                type: specs.openrewrite.org/v1beta/recipe
-                name: %1$sIndirectReplacements
-                displayName: Replace `%1$s` with `%2$s`
-                description: Replace `%1$s` method calls with calls to `%2$s`.
-                recipeList:
-                """
+                        ---
+                        type: specs.openrewrite.org/v1beta/recipe
+                        name: %1$sIndirectReplacements
+                        displayName: Replace `%1$s` with `%2$s`
+                        description: Replace `%1$s` method calls with calls to `%2$s`.
+                        recipeList:
+                        """
                         .formatted(source.getName(), target.getName())
                         .getBytes());
         // Append recipe list
@@ -129,11 +129,10 @@ class GenerateMigrationRecipeTest {
                 methodsPatterns.stream()
                         .map(m ->
                                 """
-                                  - org.openrewrite.java.ChangeMethodTargetToStatic:
+                                  - org.openrewrite.java.search.FindMethods:
                                     methodPattern: %s %s
-                                    fullyQualifiedTargetTypeName: %s
                                 """
-                                        .formatted(source.getName(), m, target.getName()))
+                                        .formatted(source.getName(), m))
                         .collect(Collectors.joining())
                         .getBytes(),
                 StandardOpenOption.APPEND);
@@ -165,28 +164,24 @@ class GenerateMigrationRecipeTest {
         assertThat(Files.readString(indirectReplacements))
                 .startsWith(
                         """
-                ---
-                type: specs.openrewrite.org/v1beta/recipe
-                name: org.codehaus.plexus.util.StringUtilsIndirectReplacements
-                displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
-                description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
-                recipeList:
-                  - org.openrewrite.java.ChangeMethodTargetToStatic:
-                    methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
-                    fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
-                  - org.openrewrite.java.ChangeMethodTargetToStatic:
-                    methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
-                    fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
-                """);
+                                ---
+                                type: specs.openrewrite.org/v1beta/recipe
+                                name: org.codehaus.plexus.util.StringUtilsIndirectReplacements
+                                displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
+                                description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+                                recipeList:
+                                  - org.openrewrite.java.search.FindMethods:
+                                    methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
+                                  - org.openrewrite.java.search.FindMethods:
+                                    methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
+                                """);
     }
 
     @Test
     void generatePlexusToCommons() throws Exception {
         Path metaInfRewrite = Path.of("src/main/resources");
         generateRecipe(
-                org.codehaus.plexus.util.StringUtils.class,
-                org.apache.commons.lang3.StringUtils.class,
-                metaInfRewrite);
+                org.codehaus.plexus.util.StringUtils.class, org.apache.commons.lang3.StringUtils.class, metaInfRewrite);
     }
 
     @Test
