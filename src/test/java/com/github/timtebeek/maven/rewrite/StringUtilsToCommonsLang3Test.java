@@ -48,8 +48,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.maven.shared.utils.StringUtils;
 
                                         class A {
@@ -59,8 +57,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -80,8 +76,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.maven.shared.utils.StringUtils;
 
                                         class A {
@@ -91,8 +85,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -109,8 +101,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.maven.shared.utils.StringUtils;
 
                                         class A {
@@ -120,8 +110,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -138,8 +126,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.codehaus.plexus.util.StringUtils;
 
                                         class A {
@@ -149,8 +135,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import java.util.Objects;
 
                                         class A {
@@ -173,8 +157,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.codehaus.plexus.util.StringUtils;
 
                                         class A {
@@ -184,8 +166,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -205,8 +185,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.codehaus.plexus.util.StringUtils;
 
                                         class A {
@@ -216,8 +194,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -234,8 +210,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.codehaus.plexus.util.StringUtils;
 
                                         class A {
@@ -245,8 +219,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.apache.commons.lang3.StringUtils;
 
                                         class A {
@@ -263,8 +235,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                 rewriteRun(
                         java(
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import org.codehaus.plexus.util.StringUtils;
 
                                         class A {
@@ -274,8 +244,6 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                                         }
                                         """,
                                 """
-                                        package org.apache.maven.shared.utils;
-
                                         import java.util.Objects;
 
                                         class A {
