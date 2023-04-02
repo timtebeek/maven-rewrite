@@ -49,8 +49,12 @@ class GenerateMigrationRecipeTest {
     }
 
     private static void generateRecipe(Class<?> source, Class<?> target, Path outputFolder) throws IOException {
-        Set<String> sourceMethodPatterns = getMethodNamesAndParameters(source.getMethods());
-        Set<String> targetMethodPatterns = getMethodNamesAndParameters(target.getMethods());
+        SortedSet<String> sourceMethodPatterns = getMethodNamesAndParameters(source.getMethods());
+        SortedSet<String> targetMethodPatterns = getMethodNamesAndParameters(target.getMethods());
+        // Duplicate any target method patterns that use CharSequence instead of String
+        targetMethodPatterns.addAll(targetMethodPatterns.stream()
+                .map(m -> m.replace("CharSequence", "String"))
+                .collect(Collectors.toSet()));
 
         // Determine which methods are present in both classes.
         SortedSet<String> methodsWithDirectReplacement = new TreeSet<>(sourceMethodPatterns);
@@ -64,14 +68,14 @@ class GenerateMigrationRecipeTest {
         writeIndirectReplacements(source, target, outputFolder, methodsWithIndirectReplacement);
     }
 
-    private static Set<String> getMethodNamesAndParameters(Method[] sourceMethods) {
+    private static SortedSet<String> getMethodNamesAndParameters(Method[] sourceMethods) {
         return Stream.of(sourceMethods)
                 // Only look at static methods
                 .filter(m -> (m.getModifiers() & 8) == 8)
                 .map(m -> m.toString()
                         .split(m.getDeclaringClass().getSimpleName())[1]
                         .substring(1))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private static void writeDirectReplacements(

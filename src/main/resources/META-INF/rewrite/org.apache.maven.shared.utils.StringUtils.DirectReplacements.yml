@@ -26,16 +26,67 @@ recipeList:
       methodPattern: org.apache.maven.shared.utils.StringUtils chop(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils contains(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils countMatches(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.apache.maven.shared.utils.StringUtils deleteWhitespace(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.apache.maven.shared.utils.StringUtils difference(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils endsWithIgnoreCase(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils equals(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils equalsIgnoreCase(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils indexOfAny(java.lang.String,java.lang.String[])
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isAlpha(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isAlphaSpace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isAlphanumeric(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isAlphanumericSpace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isBlank(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isEmpty(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isNotBlank(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isNotEmpty(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isNumeric(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils isWhitespace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.apache.maven.shared.utils.StringUtils join(java.lang.Object[],java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.apache.maven.shared.utils.StringUtils join(java.util.Iterator,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils lastIndexOfAny(java.lang.String,java.lang.String[])
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.apache.maven.shared.utils.StringUtils left(java.lang.String,int)

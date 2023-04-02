@@ -26,16 +26,67 @@ recipeList:
       methodPattern: org.codehaus.plexus.util.StringUtils chop(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils countMatches(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils deleteWhitespace(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils difference(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils equals(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils equalsIgnoreCase(java.lang.String,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils indexOfAny(java.lang.String,java.lang.String[])
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlpha(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphaSpace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphanumeric(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphanumericSpace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isBlank(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isEmpty(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNotBlank(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNotEmpty(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNumeric(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNumericSpace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils isWhitespace(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils join(java.lang.Object[],java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils join(java.util.Iterator,java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils lastIndexOfAny(java.lang.String,java.lang.String[])
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
       methodPattern: org.codehaus.plexus.util.StringUtils left(java.lang.String,int)
