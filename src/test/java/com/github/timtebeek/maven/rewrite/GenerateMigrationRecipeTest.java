@@ -145,7 +145,7 @@ class GenerateMigrationRecipeTest {
         Files.write(
                 indirectReplacementFile,
                 indirectReplacements.entrySet().stream()
-                        .sorted(Comparator.comparing(Map.Entry::getKey))
+                        .sorted(Map.Entry.comparingByKey())
                         .map(entry ->
                                 """
                                           - org.openrewrite.java.ChangeMethodTargetToStatic:
