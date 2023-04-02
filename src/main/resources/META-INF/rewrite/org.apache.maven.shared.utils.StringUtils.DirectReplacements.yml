@@ -1,120 +1,120 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: org.codehaus.plexus.util.StringUtilsDirectReplacements
-displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
-description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+name: org.apache.maven.shared.utils.StringUtils.DirectReplacements
+displayName: Replace `org.apache.maven.shared.utils.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.apache.maven.shared.utils.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
 recipeList:
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils abbreviate(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils abbreviate(java.lang.String,int,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils center(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils center(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils center(java.lang.String,int,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils center(java.lang.String,int,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils chomp(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils chomp(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils chomp(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils chomp(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils chop(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils chop(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils deleteWhitespace(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils deleteWhitespace(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils difference(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils difference(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils join(java.lang.Object[],java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils join(java.lang.Object[],java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils join(java.util.Iterator,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils join(java.util.Iterator,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils left(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils left(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils leftPad(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils leftPad(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils leftPad(java.lang.String,int,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils leftPad(java.lang.String,int,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils lowerCase(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils lowerCase(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils mid(java.lang.String,int,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils mid(java.lang.String,int,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils repeat(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils repeat(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,java.lang.String,java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,java.lang.String,java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils replaceOnce(java.lang.String,java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils replaceOnce(java.lang.String,java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils reverse(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils reverse(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils right(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils right(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils rightPad(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils rightPad(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils rightPad(java.lang.String,int,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils rightPad(java.lang.String,int,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils split(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils split(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils split(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils split(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils split(java.lang.String,java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils split(java.lang.String,java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils strip(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils strip(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils strip(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils strip(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils stripAll(java.lang.String[])
+      methodPattern: org.apache.maven.shared.utils.StringUtils stripAll(java.lang.String[])
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils stripAll(java.lang.String[],java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils stripAll(java.lang.String[],java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils stripEnd(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils stripEnd(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils stripStart(java.lang.String,java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils stripStart(java.lang.String,java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils substring(java.lang.String,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils substring(java.lang.String,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils substring(java.lang.String,int,int)
+      methodPattern: org.apache.maven.shared.utils.StringUtils substring(java.lang.String,int,int)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils swapCase(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils swapCase(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils trim(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils trim(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
   - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils upperCase(java.lang.String)
+      methodPattern: org.apache.maven.shared.utils.StringUtils upperCase(java.lang.String)
       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils

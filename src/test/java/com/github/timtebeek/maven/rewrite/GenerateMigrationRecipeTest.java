@@ -77,13 +77,13 @@ class GenerateMigrationRecipeTest {
     private static void writeDirectReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
         // Write recipes for direct replacements
-        Path yamlFile = outputFolder.resolve("META-INF/rewrite/%sDirectReplacements.yml".formatted(source.getName()));
+        Path yamlFile = outputFolder.resolve("META-INF/rewrite/%s.DirectReplacements.yml".formatted(source.getName()));
         Files.write(
                 yamlFile,
                 """
                         ---
                         type: specs.openrewrite.org/v1beta/recipe
-                        name: %1$sDirectReplacements
+                        name: %1$s.DirectReplacements
                         displayName: Replace `%1$s` with `%2$s`
                         description: Replace `%1$s` method calls with calls to `%2$s`.
                         recipeList:
@@ -110,13 +110,13 @@ class GenerateMigrationRecipeTest {
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
         // Write recipes for methods without direct replacement
         Path directReplacementFile =
-                outputFolder.resolve("META-INF/rewrite/%sIndirectReplacements.yml".formatted(source.getName()));
+                outputFolder.resolve("META-INF/rewrite/%s.FindManualReplacements.yml".formatted(source.getName()));
         Files.write(
                 directReplacementFile,
                 """
                         ---
                         type: specs.openrewrite.org/v1beta/recipe
-                        name: %1$sIndirectReplacements
+                        name: %1$s.FindManualReplacements
                         displayName: Replace `%1$s` with `%2$s`
                         description: Replace `%1$s` method calls with calls to `%2$s`.
                         recipeList:
@@ -143,13 +143,13 @@ class GenerateMigrationRecipeTest {
         Path rewriteDir = tempDir.resolve("META-INF/rewrite");
         Files.createDirectories(rewriteDir);
         generateRecipe(org.codehaus.plexus.util.StringUtils.class, org.apache.commons.lang3.StringUtils.class, tempDir);
-        Path directReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtilsDirectReplacements.yml");
+        Path directReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtils.DirectReplacements.yml");
         assertThat(Files.readString(directReplacements))
                 .startsWith(
                         """
                 ---
                 type: specs.openrewrite.org/v1beta/recipe
-                name: org.codehaus.plexus.util.StringUtilsDirectReplacements
+                name: org.codehaus.plexus.util.StringUtils.DirectReplacements
                 displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
                 description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
                 recipeList:
@@ -160,13 +160,13 @@ class GenerateMigrationRecipeTest {
                       methodPattern: org.codehaus.plexus.util.StringUtils abbreviate(java.lang.String,int,int)
                       fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
                 """);
-        Path indirectReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtilsIndirectReplacements.yml");
+        Path indirectReplacements = rewriteDir.resolve("org.codehaus.plexus.util.StringUtils.FindManualReplacements.yml");
         assertThat(Files.readString(indirectReplacements))
                 .startsWith(
                         """
                                 ---
                                 type: specs.openrewrite.org/v1beta/recipe
-                                name: org.codehaus.plexus.util.StringUtilsIndirectReplacements
+                                name: org.codehaus.plexus.util.StringUtils.FindManualReplacements
                                 displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
                                 description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
                                 recipeList:

@@ -1,0 +1,118 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.codehaus.plexus.util.StringUtils.FindManualReplacements
+displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils capitaliseAllWords(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils capitalizeFirstLetter(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils chompLast(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils chompLast(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils chopNewline(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils clean(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils concatenate(java.lang.Object[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils contains(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils countMatches(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils defaultString(java.lang.Object)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils defaultString(java.lang.Object,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils differenceAt(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils equals(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils equalsIgnoreCase(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils escape(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils escape(java.lang.String,char[],char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils escape(java.lang.String,char[],java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils getChomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils getNestedString(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils getNestedString(java.lang.String,java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils getPrechomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils indexOfAny(java.lang.String,java.lang.String[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils interpolate(java.lang.String,java.util.Map)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlpha(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphaSpace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphanumeric(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isAlphanumericSpace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isBlank(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isEmpty(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNotBlank(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNotEmpty(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNumeric(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isNumericSpace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils isWhitespace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils lastIndexOfAny(java.lang.String,java.lang.String[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils lowercaseFirstLetter(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils overlayString(java.lang.String,java.lang.String,int,int)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils prechomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils quoteAndEscape(java.lang.String,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils quoteAndEscape(java.lang.String,char,char[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils quoteAndEscape(java.lang.String,char,char[],char,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils quoteAndEscape(java.lang.String,char,char[],char[],char,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils quoteAndEscape(java.lang.String,char,char[],char[],java.lang.String,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils removeAndHump(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils removeDuplicateWhitespace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,char,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,char,char,int)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils replaceOnce(java.lang.String,char,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils reverseDelimitedString(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils uncapitalise(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils uncapitaliseAllWords(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils unifyLineSeparators(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.StringUtils unifyLineSeparators(java.lang.String,java.lang.String)
