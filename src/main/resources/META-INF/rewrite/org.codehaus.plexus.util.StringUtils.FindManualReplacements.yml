@@ -7,8 +7,6 @@ recipeList:
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils capitaliseAllWords(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils capitalizeFirstLetter(java.lang.String)
@@ -18,8 +16,6 @@ recipeList:
       methodPattern: org.codehaus.plexus.util.StringUtils chompLast(java.lang.String,java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils chopNewline(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.codehaus.plexus.util.StringUtils clean(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils concatenate(java.lang.Object[])
   - org.openrewrite.java.search.FindMethods:
@@ -64,8 +60,6 @@ recipeList:
       methodPattern: org.codehaus.plexus.util.StringUtils removeAndHump(java.lang.String,java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils removeDuplicateWhitespace(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,char,char)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.codehaus.plexus.util.StringUtils replace(java.lang.String,char,char,int)
   - org.openrewrite.java.search.FindMethods:

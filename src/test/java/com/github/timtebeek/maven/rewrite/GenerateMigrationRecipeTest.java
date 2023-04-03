@@ -73,6 +73,7 @@ class GenerateMigrationRecipeTest {
         // Determine which methods are present in the source class but not in the target class.
         SortedSet<String> methodsWithIndirectReplacement = new TreeSet<>(sourceMethodPatterns);
         methodsWithIndirectReplacement.removeAll(targetMethodPatterns);
+        methodsWithIndirectReplacement.removeAll(INDIRECT_REPLACEMENTS.get(source).keySet());
 
         // Write recipes for direct replacements
         writeDirectReplacements(source, target, outputFolder, methodsWithDirectReplacement);
@@ -234,7 +235,7 @@ class GenerateMigrationRecipeTest {
                                   - org.openrewrite.java.search.FindMethods:
                                       methodPattern: org.codehaus.plexus.util.StringUtils addAndDeHump(java.lang.String)
                                   - org.openrewrite.java.search.FindMethods:
-                                      methodPattern: org.codehaus.plexus.util.StringUtils capitalise(java.lang.String)
+                                      methodPattern: org.codehaus.plexus.util.StringUtils capitaliseAllWords(java.lang.String)
                                 """);
     }
 

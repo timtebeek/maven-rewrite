@@ -7,8 +7,6 @@ recipeList:
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils addAndDeHump(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.apache.maven.shared.utils.StringUtils capitalise(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils capitaliseAllWords(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils capitalizeFirstLetter(java.lang.String)
@@ -18,8 +16,6 @@ recipeList:
       methodPattern: org.apache.maven.shared.utils.StringUtils chompLast(java.lang.String,java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils chopNewline(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.apache.maven.shared.utils.StringUtils clean(java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils concatenate(java.lang.Object[])
   - org.openrewrite.java.search.FindMethods:
@@ -60,8 +56,6 @@ recipeList:
       methodPattern: org.apache.maven.shared.utils.StringUtils removeAndHump(java.lang.String,java.lang.String)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils removeDuplicateWhitespace(java.lang.String)
-  - org.openrewrite.java.search.FindMethods:
-      methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,char,char)
   - org.openrewrite.java.search.FindMethods:
       methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,char,char,int)
   - org.openrewrite.java.search.FindMethods:
