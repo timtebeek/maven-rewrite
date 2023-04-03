@@ -16,21 +16,15 @@ name: com.github.timtebeek.maven.rewrite.StringUtilsToCommonsLang3
 displayName: "[MNG-6825] Replace StringUtils with Commons Lang3"
 description: https://issues.apache.org/jira/browse/MNG-6825
 recipeList:
-  - org.openrewrite.maven.AddDependency:
-      groupId: org.apache.commons
-      artifactId: commons-lang3
-      version: 3.x
-      onlyIfUsing: org.codehaus.plexus.util.StringUtils
-      acceptTransitive: "True"
-  - org.openrewrite.maven.AddDependency:
-      groupId: org.apache.commons
-      artifactId: commons-lang3
-      version: 3.x
-      onlyIfUsing: org.apache.maven.shared.utils.StringUtils
-      acceptTransitive: "True"
   - org.apache.maven.shared.utils.StringUtils.DirectReplacements
   - org.apache.maven.shared.utils.StringUtils.IndirectReplacements
   - org.apache.maven.shared.utils.StringUtils.ManualReplacements
   - org.codehaus.plexus.util.StringUtils.DirectReplacements
   - org.codehaus.plexus.util.StringUtils.IndirectReplacements
   - org.codehaus.plexus.util.StringUtils.ManualReplacements
+  - org.openrewrite.maven.AddDependency:
+      groupId: org.apache.commons
+      artifactId: commons-lang3
+      version: 3.x
+      onlyIfUsing: org.apache.commons.lang3.StringUtils
+      acceptTransitive: "True"
