@@ -25,7 +25,8 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
-import static org.openrewrite.java.Assertions.java;
+import static org.openrewrite.java.Assertions.*;
+import static org.openrewrite.maven.Assertions.pomXml;
 
 class StringUtilsToCommonsLang3Test implements RewriteTest {
 
@@ -36,6 +37,219 @@ class StringUtilsToCommonsLang3Test implements RewriteTest {
                         .scanRuntimeClasspath()
                         .build()
                         .activateRecipes("com.github.timtebeek.maven.rewrite.StringUtilsToCommonsLang3"));
+    }
+
+    @Nested
+    class AddDependencies {
+
+        @Test
+        void addMissingDependency() {
+            rewriteRun(
+                    mavenProject(
+                            "project",
+                            // language=Java
+                            srcMainJava(
+                                    java(
+                                            """
+                                        import org.apache.maven.shared.utils.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """,
+                                            """
+                                        import org.apache.commons.lang3.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """),
+                                    // language=xml
+                                    pomXml(
+                                            """
+                                            <project>
+                                                <modelVersion>4.0.0</modelVersion>
+                                                <groupId>com.github.timtebeek.maven</groupId>
+                                                <artifactId>project</artifactId>
+                                                <version>1.0.0</version>
+                                                <dependencies>
+                                                    <dependency>
+                                                        <groupId>org.apache.maven.shared</groupId>
+                                                        <artifactId>maven-shared-utils</artifactId>
+                                                        <version>3.2.1</version>
+                                                    </dependency>
+                                                </dependencies>
+                                            </project>
+                                            """,
+                                            """
+                                            <project>
+                                                <modelVersion>4.0.0</modelVersion>
+                                                <groupId>com.github.timtebeek.maven</groupId>
+                                                <artifactId>project</artifactId>
+                                                <version>1.0.0</version>
+                                                <dependencies>
+                                                    <dependency>
+                                                        <groupId>org.apache.commons</groupId>
+                                                        <artifactId>commons-lang3</artifactId>
+                                                        <version>3.12.0</version>
+                                                    </dependency>
+                                                    <dependency>
+                                                        <groupId>org.apache.maven.shared</groupId>
+                                                        <artifactId>maven-shared-utils</artifactId>
+                                                        <version>3.2.1</version>
+                                                    </dependency>
+                                                </dependencies>
+                                            </project>
+                                            """))));
+        }
+
+        @Test
+        void notAddedWhenPresent() {
+            rewriteRun(
+                    mavenProject(
+                            "project",
+                            // language=Java
+                            srcMainJava(
+                                    java(
+                                            """
+                                        import org.apache.maven.shared.utils.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """,
+                                            """
+                                        import org.apache.commons.lang3.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """)),
+                            // language=xml
+                            pomXml(
+                                    """
+                                            <project>
+                                                <modelVersion>4.0.0</modelVersion>
+                                                <groupId>com.github.timtebeek.maven</groupId>
+                                                <artifactId>project</artifactId>
+                                                <version>1.0.0</version>
+                                                <dependencies>
+                                                    <dependency>
+                                                        <groupId>org.apache.commons</groupId>
+                                                        <artifactId>commons-lang3</artifactId>
+                                                        <version>3.12.0</version>
+                                                    </dependency>
+                                                    <dependency>
+                                                        <groupId>org.apache.maven.shared</groupId>
+                                                        <artifactId>maven-shared-utils</artifactId>
+                                                        <version>3.2.1</version>
+                                                    </dependency>
+                                                </dependencies>
+                                            </project>
+                                            """)));
+        }
+
+        @Test
+        void notAddedTwice() {
+            rewriteRun(
+                    mavenProject(
+                            "project",
+                            // language=Java
+                            srcMainJava(
+                                    java(
+                                            """
+                                        import org.apache.maven.shared.utils.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """,
+                                            """
+                                        import org.apache.commons.lang3.StringUtils;
+
+                                        class A {
+                                            public void test() {
+                                                StringUtils.reverse("foo");
+                                            }
+                                        }
+                                        """),
+                                    java(
+                                            """
+                                                    import org.codehaus.plexus.util.StringUtils;
+
+                                                    class B {
+                                                        public void test() {
+                                                            StringUtils.reverse("foo");
+                                                        }
+                                                    }
+                                                    """,
+                                            """
+                                                    import org.apache.commons.lang3.StringUtils;
+
+                                                    class B {
+                                                        public void test() {
+                                                            StringUtils.reverse("foo");
+                                                        }
+                                                    }
+                                                    """)),
+                            // language=xml
+                            pomXml(
+                                    """
+                                            <project>
+                                                <modelVersion>4.0.0</modelVersion>
+                                                <groupId>com.github.timtebeek.maven</groupId>
+                                                <artifactId>project</artifactId>
+                                                <version>1.0.0</version>
+                                                <dependencies>
+                                                    <dependency>
+                                                        <groupId>org.apache.maven.shared</groupId>
+                                                        <artifactId>maven-shared-utils</artifactId>
+                                                        <version>3.2.1</version>
+                                                    </dependency>
+                                                    <dependency>
+                                                        <groupId>org.codehaus.plexus</groupId>
+                                                        <artifactId>plexus-utils</artifactId>
+                                                        <version>3.5.0</version>
+                                                    </dependency>
+                                                </dependencies>
+                                            </project>
+                                            """,
+                                    """
+                                            <project>
+                                                <modelVersion>4.0.0</modelVersion>
+                                                <groupId>com.github.timtebeek.maven</groupId>
+                                                <artifactId>project</artifactId>
+                                                <version>1.0.0</version>
+                                                <dependencies>
+                                                    <dependency>
+                                                        <groupId>org.apache.commons</groupId>
+                                                        <artifactId>commons-lang3</artifactId>
+                                                        <version>3.12.0</version>
+                                                    </dependency>
+                                                    <dependency>
+                                                        <groupId>org.apache.maven.shared</groupId>
+                                                        <artifactId>maven-shared-utils</artifactId>
+                                                        <version>3.2.1</version>
+                                                    </dependency>
+                                                    <dependency>
+                                                        <groupId>org.codehaus.plexus</groupId>
+                                                        <artifactId>plexus-utils</artifactId>
+                                                        <version>3.5.0</version>
+                                                    </dependency>
+                                                </dependencies>
+                                            </project>
+                                            """)));
+        }
     }
 
     @Nested
