@@ -1,0 +1,94 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.apache.maven.shared.utils.io.FileUtils.FindManualReplacements
+displayName: Replace `org.apache.maven.shared.utils.io.FileUtils` with `org.apache.commons.io.FileUtils`
+description: Replace `org.apache.maven.shared.utils.io.FileUtils` method calls with calls to `org.apache.commons.io.FileUtils`.
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyDirectory(java.io.File,java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyDirectoryStructure(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyFile(java.io.File,java.io.File,java.lang.String,org.apache.maven.shared.utils.io.
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils createSymbolicLink(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils createTempFile(java.lang.String,java.lang.String,java.io.File)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils deleteDirectory(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils deleteLegacyStyle(java.io.File)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils dirname(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils extension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileAppend(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileAppend(java.lang.String,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileDelete(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileExists(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileRead(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileRead(java.io.File,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileRead(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileReadArray(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileWrite(java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileWrite(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileWrite(java.lang.String,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileWriteArray(java.io.File,java.lang.String,java.lang.String[]) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils fileWriteArray(java.io.File,java.lang.String[]) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils filename(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils forceDelete(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getDefaultExcludes()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getDefaultExcludesAsList()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getDefaultExcludesAsString()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getExtension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getFileAndDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean,boolean,boolean,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getFileNames(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getFiles(java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getFiles(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils getFilesFromExtension(java.lang.String,java.lang.String[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils isSymbolicLink(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils isSymbolicLinkForSure(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils loadFile(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils mkdir(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils normalize(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils removeExtension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils rename(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils resolveFile(java.io.File,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils sizeOfDirectory(java.lang.String)

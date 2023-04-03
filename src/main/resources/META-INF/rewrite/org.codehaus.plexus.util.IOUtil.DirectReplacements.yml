@@ -1,0 +1,45 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.codehaus.plexus.util.IOUtil.DirectReplacements
+displayName: Replace `org.codehaus.plexus.util.IOUtil` with `org.apache.commons.io.IOUtils`
+description: Replace `org.codehaus.plexus.util.IOUtil` method calls with calls to `org.apache.commons.io.IOUtils`.
+recipeList:
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil contentEquals(java.io.InputStream,java.io.InputStream) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.OutputStream) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.OutputStream,int) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.Writer) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.Writer,java.lang.String) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.Reader,java.io.OutputStream) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.Reader,java.io.Writer) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.io.InputStream) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.io.InputStream,int) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.io.Reader) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.InputStream) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.InputStream,java.lang.String) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.Reader) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.IOUtils

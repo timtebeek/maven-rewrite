@@ -1,0 +1,128 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.codehaus.plexus.util.FileUtils.FindManualReplacements
+displayName: Replace `org.codehaus.plexus.util.FileUtils` with `org.apache.commons.io.FileUtils`
+description: Replace `org.codehaus.plexus.util.FileUtils` method calls with calls to `org.apache.commons.io.FileUtils`.
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils basename(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils basename(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils byteCountToDisplaySize(int)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils catPath(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils cleanDirectory(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyDirectory(java.io.File,java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyDirectoryLayout(java.io.File,java.io.File,java.lang.String[],java.lang.String[]) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyDirectoryStructure(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyDirectoryStructureIfModified(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyFile(java.io.File,java.io.File,java.lang.String,org.codehaus.plexus.util.
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyFileIfModified(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyFileToDirectory(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyFileToDirectoryIfModified(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyFileToDirectoryIfModified(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils copyStreamToFile(org.codehaus.plexus.util.io.InputStreamFacade,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils createTempFile(java.lang.String,java.lang.String,java.io.File)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils deleteDirectory(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils dirname(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils extension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileAppend(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileAppend(java.lang.String,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileDelete(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileExists(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.io.File,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileRead(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.io.File,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils fileWrite(java.lang.String,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils filename(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils forceDelete(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getDefaultExcludes()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getDefaultExcludesAsList()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getDefaultExcludesAsString()
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getExtension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFile(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFileAndDirectoryNames(java.io.File,java.lang.String,java.lang.String,boolean,boolean,boolean,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFileNames(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFileNames(java.io.File,java.lang.String,java.lang.String,boolean,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFiles(java.io.File,java.lang.String,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFiles(java.io.File,java.lang.String,java.lang.String,boolean) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getFilesFromExtension(java.lang.String,java.lang.String[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getPath(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils getPath(java.lang.String,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils isValidWindowsFileName(java.io.File)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils linkFile(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils loadFile(java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils mkDirs(java.io.File,java.lang.String[],java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils mkdir(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils normalize(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils removeExtension(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils removePath(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils removePath(java.lang.String,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils rename(java.io.File,java.io.File) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils resolveFile(java.io.File,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils sizeOfDirectory(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.FileUtils waitFor(java.lang.String,int)

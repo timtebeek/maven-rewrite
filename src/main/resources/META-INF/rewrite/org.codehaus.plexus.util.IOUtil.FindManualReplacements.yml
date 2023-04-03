@@ -1,0 +1,64 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.codehaus.plexus.util.IOUtil.FindManualReplacements
+displayName: Replace `org.codehaus.plexus.util.IOUtil` with `org.apache.commons.io.IOUtils`
+description: Replace `org.codehaus.plexus.util.IOUtil` method calls with calls to `org.apache.commons.io.IOUtils`.
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil bufferedCopy(java.io.InputStream,java.io.OutputStream) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil close(java.io.InputStream)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil close(java.io.OutputStream)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil close(java.io.Reader)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil close(java.io.Writer)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil close(java.nio.channels.Channel)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.OutputStream) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.OutputStream,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.Writer) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.Writer,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.Writer,java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(byte[],java.io.Writer,java.lang.String,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.Writer,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.InputStream,java.io.Writer,java.lang.String,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.Reader,java.io.OutputStream,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.io.Reader,java.io.Writer,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.lang.String,java.io.OutputStream) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.lang.String,java.io.OutputStream,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil copy(java.lang.String,java.io.Writer) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.io.Reader,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toByteArray(java.lang.String,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(byte[]) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(byte[],int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(byte[],java.lang.String) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(byte[],java.lang.String,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.InputStream,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.InputStream,java.lang.String,int) throws java.io.IOException
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.codehaus.plexus.util.IOUtil toString(java.io.Reader,int) throws java.io.IOException

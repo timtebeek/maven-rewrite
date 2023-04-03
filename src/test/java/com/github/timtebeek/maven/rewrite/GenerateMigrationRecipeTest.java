@@ -23,7 +23,10 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -263,5 +266,33 @@ class GenerateMigrationRecipeTest {
                 org.apache.maven.shared.utils.StringUtils.class,
                 org.apache.commons.lang3.StringUtils.class,
                 metaInfRewrite);
+    }
+
+    @Test
+    void generatePlexusFileUtilsToCommons() throws Exception {
+        Path metaInfRewrite = Path.of("src/main/resources");
+        generateRecipe(org.codehaus.plexus.util.FileUtils.class, org.apache.commons.io.FileUtils.class, metaInfRewrite);
+    }
+
+    @Test
+    void generateMavenSharedFileUtilsToCommons() throws Exception {
+        Path metaInfRewrite = Path.of("src/main/resources");
+        generateRecipe(
+                org.apache.maven.shared.utils.io.FileUtils.class,
+                org.apache.commons.io.FileUtils.class,
+                metaInfRewrite);
+    }
+
+    @Test
+    void generatePlexusIoUtilsToCommons() throws Exception {
+        Path metaInfRewrite = Path.of("src/main/resources");
+        generateRecipe(org.codehaus.plexus.util.IOUtil.class, org.apache.commons.io.IOUtils.class, metaInfRewrite);
+    }
+
+    @Test
+    void generateMavenSharedIoUtilsToCommons() throws Exception {
+        Path metaInfRewrite = Path.of("src/main/resources");
+        generateRecipe(
+                org.apache.maven.shared.utils.io.IOUtil.class, org.apache.commons.io.IOUtils.class, metaInfRewrite);
     }
 }
