@@ -1,0 +1,45 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.apache.maven.shared.utils.io.FileUtils.DirectReplacements
+displayName: Replace `org.apache.maven.shared.utils.io.FileUtils` with `org.apache.commons.io.FileUtils`
+description: Replace `org.apache.maven.shared.utils.io.FileUtils` method calls with calls to `org.apache.commons.io.FileUtils`.
+recipeList:
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils cleanDirectory(java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils contentEquals(java.io.File,java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyDirectory(java.io.File,java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyFile(java.io.File,java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyFileToDirectory(java.io.File,java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils copyURLToFile(java.net.URL,java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils delete(java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils deleteDirectory(java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils forceDelete(java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils forceMkdir(java.io.File) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils sizeOfDirectory(java.io.File)
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils toFile(java.net.URL)
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.io.FileUtils toURLs(java.io.File[]) throws java.io.IOException
+      fullyQualifiedTargetTypeName: org.apache.commons.io.FileUtils
