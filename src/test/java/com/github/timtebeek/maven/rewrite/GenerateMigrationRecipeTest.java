@@ -48,15 +48,15 @@ class GenerateMigrationRecipeTest {
 
     private static final Map<Class<?>, Map<String, String>> INDIRECT_REPLACEMENTS = Map.of(
             org.apache.maven.shared.utils.StringUtils.class,
-                    Map.of(
-                            "capitalise(java.lang.String)", "capitalize",
-                            "clean(java.lang.String)", "trimToEmpty",
-                            "replace(java.lang.String,char,char)", "replaceChars"),
+            Map.of(
+                    "capitalise(java.lang.String)", "capitalize",
+                    "clean(java.lang.String)", "trimToEmpty",
+                    "replace(java.lang.String,char,char)", "replaceChars"),
             org.codehaus.plexus.util.StringUtils.class,
-                    Map.of(
-                            "capitalise(java.lang.String)", "capitalize",
-                            "clean(java.lang.String)", "trimToEmpty",
-                            "replace(java.lang.String,char,char)", "replaceChars"));
+            Map.of(
+                    "capitalise(java.lang.String)", "capitalize",
+                    "clean(java.lang.String)", "trimToEmpty",
+                    "replace(java.lang.String,char,char)", "replaceChars"));
 
     private static void generateRecipe(Class<?> source, Class<?> target, Path outputFolder) throws IOException {
         SortedSet<String> sourceMethodPatterns = getMethodNamesAndParameters(source.getMethods());
@@ -73,17 +73,19 @@ class GenerateMigrationRecipeTest {
         SortedSet<String> methodsWithDirectReplacement = new TreeSet<>(sourceMethodPatterns);
         methodsWithDirectReplacement.retainAll(targetMethodPatterns);
         // Determine which methods are present in the source class but not in the target class.
-        SortedSet<String> methodsWithIndirectReplacement = new TreeSet<>(sourceMethodPatterns);
-        methodsWithIndirectReplacement.removeAll(targetMethodPatterns);
-        methodsWithIndirectReplacement.removeAll(
-                INDIRECT_REPLACEMENTS.get(source).keySet());
+        SortedSet<String> methodsWithoutReplacement = new TreeSet<>(sourceMethodPatterns);
+        methodsWithoutReplacement.removeAll(targetMethodPatterns);
+        Map<String, String> indirectReplacements = INDIRECT_REPLACEMENTS.get(source);
+        if (indirectReplacements != null) {
+            methodsWithoutReplacement.removeAll(indirectReplacements.keySet());
+        }
 
         // Write recipes for direct replacements
         writeDirectReplacements(source, target, outputFolder, methodsWithDirectReplacement);
-        writeFindManualReplacements(source, target, outputFolder, methodsWithIndirectReplacement);
+        writeFindManualReplacements(source, target, outputFolder, methodsWithoutReplacement);
 
         // Write recipes for indirect replacements
-        writeIndirectReplacements(source, target, outputFolder, INDIRECT_REPLACEMENTS.get(source));
+        writeIndirectReplacements(source, target, outputFolder, indirectReplacements);
     }
 
     private static SortedSet<String> getMethodNamesAndParameters(Method[] sourceMethods) {
@@ -131,6 +133,10 @@ class GenerateMigrationRecipeTest {
     private static void writeIndirectReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Map<String, String> indirectReplacements)
             throws IOException {
+        if (indirectReplacements == null || indirectReplacements.isEmpty()) {
+            return;
+        }
+
         // Write recipes for methods without direct replacement
         Path indirectReplacementFile =
                 outputFolder.resolve("META-INF/rewrite/%s.IndirectReplacements.yml".formatted(source.getName()));
@@ -169,6 +175,10 @@ class GenerateMigrationRecipeTest {
 
     private static void writeFindManualReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
+        if (methodsPatterns == null || methodsPatterns.isEmpty()) {
+            return;
+        }
+
         // Write recipes for methods without direct replacement
         Path directReplacementFile =
                 outputFolder.resolve("META-INF/rewrite/%s.FindManualReplacements.yml".formatted(source.getName()));
@@ -240,14 +250,14 @@ class GenerateMigrationRecipeTest {
     }
 
     @Test
-    void generatePlexusToCommons() throws Exception {
+    void generatePlexusStringUtilsToCommons() throws Exception {
         Path metaInfRewrite = Path.of("src/main/resources");
         generateRecipe(
                 org.codehaus.plexus.util.StringUtils.class, org.apache.commons.lang3.StringUtils.class, metaInfRewrite);
     }
 
     @Test
-    void generateMavenSharedToCommons() throws Exception {
+    void generateMavenSharedStringUtilsToCommons() throws Exception {
         Path metaInfRewrite = Path.of("src/main/resources");
         generateRecipe(
                 org.apache.maven.shared.utils.StringUtils.class,
