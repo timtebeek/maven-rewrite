@@ -18,9 +18,6 @@
  */
 package com.github.timtebeek.maven.rewrite;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -29,6 +26,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,14 +47,16 @@ class GenerateMigrationRecipeTest {
     }
 
     private static final Map<Class<?>, Map<String, String>> INDIRECT_REPLACEMENTS = Map.of(
-            org.apache.maven.shared.utils.StringUtils.class, Map.of(
-                    "capitalise(java.lang.String)", "capitalize",
-                    "clean(java.lang.String)", "trimToEmpty",
-                    "replace(java.lang.String,char,char)", "replaceChars"),
-            org.codehaus.plexus.util.StringUtils.class, Map.of(
-                    "capitalise(java.lang.String)", "capitalize",
-                    "clean(java.lang.String)", "trimToEmpty",
-                    "replace(java.lang.String,char,char)", "replaceChars"));
+            org.apache.maven.shared.utils.StringUtils.class,
+                    Map.of(
+                            "capitalise(java.lang.String)", "capitalize",
+                            "clean(java.lang.String)", "trimToEmpty",
+                            "replace(java.lang.String,char,char)", "replaceChars"),
+            org.codehaus.plexus.util.StringUtils.class,
+                    Map.of(
+                            "capitalise(java.lang.String)", "capitalize",
+                            "clean(java.lang.String)", "trimToEmpty",
+                            "replace(java.lang.String,char,char)", "replaceChars"));
 
     private static void generateRecipe(Class<?> source, Class<?> target, Path outputFolder) throws IOException {
         SortedSet<String> sourceMethodPatterns = getMethodNamesAndParameters(source.getMethods());
@@ -73,7 +75,8 @@ class GenerateMigrationRecipeTest {
         // Determine which methods are present in the source class but not in the target class.
         SortedSet<String> methodsWithIndirectReplacement = new TreeSet<>(sourceMethodPatterns);
         methodsWithIndirectReplacement.removeAll(targetMethodPatterns);
-        methodsWithIndirectReplacement.removeAll(INDIRECT_REPLACEMENTS.get(source).keySet());
+        methodsWithIndirectReplacement.removeAll(
+                INDIRECT_REPLACEMENTS.get(source).keySet());
 
         // Write recipes for direct replacements
         writeDirectReplacements(source, target, outputFolder, methodsWithDirectReplacement);
@@ -126,7 +129,8 @@ class GenerateMigrationRecipeTest {
     }
 
     private static void writeIndirectReplacements(
-            Class<?> source, Class<?> target, Path outputFolder, Map<String, String> indirectReplacements) throws IOException {
+            Class<?> source, Class<?> target, Path outputFolder, Map<String, String> indirectReplacements)
+            throws IOException {
         // Write recipes for methods without direct replacement
         Path indirectReplacementFile =
                 outputFolder.resolve("META-INF/rewrite/%s.IndirectReplacements.yml".formatted(source.getName()));
@@ -157,15 +161,11 @@ class GenerateMigrationRecipeTest {
                                               newMethodName: %4$s
                                         """
                                         .formatted(
-                                                source.getName(),
-                                                entry.getKey(),
-                                                target.getName(),
-                                                entry.getValue()))
+                                                source.getName(), entry.getKey(), target.getName(), entry.getValue()))
                         .collect(Collectors.joining())
                         .getBytes(),
                 StandardOpenOption.APPEND);
     }
-
 
     private static void writeFindManualReplacements(
             Class<?> source, Class<?> target, Path outputFolder, Set<String> methodsPatterns) throws IOException {
