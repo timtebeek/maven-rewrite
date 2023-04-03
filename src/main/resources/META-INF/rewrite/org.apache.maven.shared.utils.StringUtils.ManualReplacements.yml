@@ -1,0 +1,19 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.apache.maven.shared.utils.StringUtils.ManualReplacements
+displayName: Replace `org.apache.maven.shared.utils.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.apache.maven.shared.utils.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+recipeList:
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(Object)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object)
+      newMethodName: toString
+
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(Object, String)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object, String)
+      newMethodName: toString

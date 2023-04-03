@@ -1,0 +1,72 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.apache.maven.shared.utils.StringUtils.FindManualReplacements
+displayName: Replace `org.apache.maven.shared.utils.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.apache.maven.shared.utils.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils addAndDeHump(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils capitaliseAllWords(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils capitalizeFirstLetter(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils chompLast(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils chompLast(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils chopNewline(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils concatenate(java.lang.Object[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(java.lang.Object)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils defaultString(java.lang.Object,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils differenceAt(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils escape(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils escape(java.lang.String,char[],char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils getChomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils getNestedString(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils getNestedString(java.lang.String,java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils getPrechomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils interpolate(java.lang.String,java.util.Map)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils lowercaseFirstLetter(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils overlayString(java.lang.String,java.lang.String,int,int)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils prechomp(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils quoteAndEscape(java.lang.String,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils quoteAndEscape(java.lang.String,char,char[])
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils quoteAndEscape(java.lang.String,char,char[],char,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils quoteAndEscape(java.lang.String,char,char[],char[],char,boolean)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils removeAndHump(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils removeDuplicateWhitespace(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,char,char,int)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils replaceOnce(java.lang.String,char,char)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils reverseDelimitedString(java.lang.String,java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils uncapitalise(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils uncapitaliseAllWords(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils unifyLineSeparators(java.lang.String)
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: org.apache.maven.shared.utils.StringUtils unifyLineSeparators(java.lang.String,java.lang.String)

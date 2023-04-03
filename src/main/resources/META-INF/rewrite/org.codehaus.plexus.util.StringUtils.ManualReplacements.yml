@@ -1,0 +1,19 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.codehaus.plexus.util.StringUtils.ManualReplacements
+displayName: Replace `org.codehaus.plexus.util.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.codehaus.plexus.util.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+recipeList:
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils defaultString(Object)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object)
+      newMethodName: toString
+
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.codehaus.plexus.util.StringUtils defaultString(Object,String)
+      fullyQualifiedTargetTypeName: java.util.Objects
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: java.util.Objects defaultString(Object,String)
+      newMethodName: toString

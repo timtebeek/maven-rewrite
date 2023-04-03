@@ -1,0 +1,24 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.apache.maven.shared.utils.StringUtils.IndirectReplacements
+displayName: Replace `org.apache.maven.shared.utils.StringUtils` with `org.apache.commons.lang3.StringUtils`
+description: Replace `org.apache.maven.shared.utils.StringUtils` method calls with calls to `org.apache.commons.lang3.StringUtils`.
+recipeList:
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils capitalise(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.apache.commons.lang3.StringUtils capitalise(java.lang.String)
+      newMethodName: capitalize
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils clean(java.lang.String)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.apache.commons.lang3.StringUtils clean(java.lang.String)
+      newMethodName: trimToEmpty
+  - org.openrewrite.java.ChangeMethodTargetToStatic:
+      methodPattern: org.apache.maven.shared.utils.StringUtils replace(java.lang.String,char,char)
+      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: org.apache.commons.lang3.StringUtils replace(java.lang.String,char,char)
+      newMethodName: replaceChars

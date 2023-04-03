@@ -1,24 +1,6 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.github.timtebeek.maven.rewrite.ReplaceStringUtils
-displayName: [MNG-6825] Replace StringUtils
-description: https://issues.apache.org/jira/browse/MNG-6825
-applicability:
-  singleSource:
-    - org.openrewrite.java.search.FindTypes:
-        fullyQualifiedTypeName: org.apache.maven.shared.utils.StringUtils
-  anySource:
-    - org.openrewrite.maven.search.FindDependency:
-        groupId: org.apache.commons
-        artifactId: commons-lang3
-recipeList:
-  - com.github.timtebeek.maven.rewrite.FindStringUtils
-  - com.github.timtebeek.maven.rewrite.PlexusStringUtilsToCommonsLang3
-  - com.github.timtebeek.maven.rewrite.MavenSharedStringUtilsToCommonsLang3
-
----
-type: specs.openrewrite.org/v1beta/recipe
 name: com.github.timtebeek.maven.rewrite.FindStringUtils
-displayName: Find StringUtils
+displayName: Find StringUtils methods
 description: https://issues.apache.org/jira/browse/MNG-6825
 recipeList:
   - org.openrewrite.java.search.FindMethods:
@@ -30,26 +12,19 @@ recipeList:
 
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.github.timtebeek.maven.rewrite.PlexusStringUtilsToCommonsLang3
-displayName: Replace Plexus StringUtils with Commons Lang3
+name: com.github.timtebeek.maven.rewrite.StringUtilsToCommonsLang3
+displayName: "[MNG-6825] Replace StringUtils with Commons Lang3"
 description: https://issues.apache.org/jira/browse/MNG-6825
 recipeList:
-  - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: org.codehaus.plexus.util.StringUtils
-      newFullyQualifiedTypeName: org.apache.commons.lang3.StringUtils
-  - org.openrewrite.java.ChangeMethodTargetToStatic:
-      methodPattern: org.codehaus.plexus.util.StringUtils clean(String)
-      fullyQualifiedTargetTypeName: org.apache.commons.lang3.StringUtils
-  - org.openrewrite.java.ChangeMethodName:
-      methodPattern: org.apache.commons.lang3.StringUtils clean(String)
-      newMethodName: trimToEmpty
-
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.github.timtebeek.maven.rewrite.MavenSharedStringUtilsToCommonsLang3
-displayName: Replace Maven Shared StringUtils with Commons Lang3
-description: https://issues.apache.org/jira/browse/MNG-6825
-recipeList:
-  - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: org.apache.maven.shared.utils.StringUtils
-      newFullyQualifiedTypeName: org.apache.commons.lang3.StringUtils
+  - org.apache.maven.shared.utils.StringUtils.DirectReplacements
+  - org.apache.maven.shared.utils.StringUtils.IndirectReplacements
+  - org.apache.maven.shared.utils.StringUtils.ManualReplacements
+  - org.codehaus.plexus.util.StringUtils.DirectReplacements
+  - org.codehaus.plexus.util.StringUtils.IndirectReplacements
+  - org.codehaus.plexus.util.StringUtils.ManualReplacements
+  - org.openrewrite.maven.AddDependency:
+      groupId: org.apache.commons
+      artifactId: commons-lang3
+      version: 3.x
+      onlyIfUsing: org.apache.commons.lang3.StringUtils
+      acceptTransitive: "True"
